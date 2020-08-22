@@ -1,0 +1,22 @@
+Config file backup:
+  file.rename:
+    - name: /etc/syslog-ng/syslog-ng.conf.BAK
+    - source: /etc/syslog-ng/syslog-ng.conf
+
+Syslog-ng configuratie:
+  file.append:
+    - name: /etc/syslog-ng/syslog-ng.conf
+    - text: |
+        @version: 3.5
+        @include "scl.conf"
+        @include "`scl-root`/system/tty10.conf"
+        source s_local { 
+             system(); internal(); 
+        };
+        destination loghost { syslog("10.0.7.81" transport("tcp") port(514)); };
+        log { source(s_local); destination(loghost); };
+
+Syslog-ng:
+  service.running:
+    - enable: True
+    - reload: True
