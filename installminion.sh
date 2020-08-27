@@ -9,11 +9,6 @@ sudo sh install_salt.sh -A $IP_MASTER
 
 sudo service salt-minion stop
 
-#add monitor host to hosts
-sudo chmod -R 777 /etc/hosts
-echo "10.0.7.81 saltmaster" >> /etc/hosts
-sudo chmod -R 500 /etc/hosts
-
 #minion naam veranderen
 sudo rm -rf /etc/salt/minion_id
 sudo touch /etc/salt/minion_id && sudo chmod 777 /etc/salt/minion_id
